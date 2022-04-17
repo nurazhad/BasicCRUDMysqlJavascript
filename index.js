@@ -1,9 +1,12 @@
 import express from "express";
 import db from "./config/database.js"
-import{
-    handlerCreateCars,
-    handlerShowCars
-} from  "./handler.js"
+import {
+    handlerCreateCars, 
+    handlerShowCars,
+    handlerSearchCars,
+    handlerUpdateCars,
+    handlerDeleteCars
+} from "./handler.js";
 
 const app = express();
 app.use(express.json())
@@ -22,7 +25,10 @@ try {
 app.get('/', (req, res) => {
     res.send('Hello World')
 })
-app.post('/api/input/',handlerCreateCars)
-app.get('/api/show/',handlerShowCars)
+app.get('/api/cars/',handlerShowCars)
+app.get('/api/cars/:id',handlerSearchCars)
+app.put('/api/cars/:id',handlerUpdateCars)
+app.post('/api/cars/',handlerCreateCars)
+app.delete('/api/cars/:id',handlerDeleteCars)
 
 app.listen(5000,() => console.log('Server running at localhost:5000'))
